@@ -12,21 +12,23 @@ export default function Home() {
 
   useEffect(() => {
     let storedItems = []
-    let key : any
 
     for (let i = 0; i < localStorage.length; i++) {
-      key = localStorage.key(i)
+      const key = localStorage.key(i) || ''
       const value = localStorage.getItem(key);
       storedItems.push(value)
     }
-    setItems(storedItems.filter(item => item !== null) as string[]); 
+    setItems(storedItems.filter(item => item !== null) as string[]);
   }, [])
 
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
     counter = localStorage.length + 1
     const newItems = [...items, inputValue]
     setItems(newItems)
+    localStorage.setItem(counter.toString(), inputValue) // save to localStorage
+    setInputValue('') // clear input
   }
 
   const handleClear = () => {
