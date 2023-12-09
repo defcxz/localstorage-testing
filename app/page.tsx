@@ -23,9 +23,8 @@ export default function Home() {
   }, [])
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     counter = localStorage.length + 1
-    e.preventDefault()
     const newItems = [...items, inputValue]
     setItems(newItems)
   }
@@ -73,7 +72,7 @@ export default function Home() {
             </tbody>
           </table>
         ) : (
-          <p className="mt-5">You don't have anything saved.</p>
+          <p className="mt-5">You dont have anything saved.</p>
         )}
 
         <button className='bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-5' onClick={handleClear}>Clear {items.length} localStorage items</button>
